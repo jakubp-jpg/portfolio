@@ -9,418 +9,86 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --cream: #f7f4ef;
-      --ink: #1a1814;
-      --ink-soft: #4a4640;
-      --ink-muted: #8a8580;
-      --accent: #c8392b;
-      --rule: #ddd9d3;
-      --hover-bg: #f0ece5;
-    }
-
+    :root { --cream: #f7f4ef; --ink: #1a1814; --ink-soft: #4a4640; --ink-muted: #8a8580; --accent: #c8392b; --rule: #ddd9d3; --hover-bg: #f0ece5; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--cream);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 3rem;
-      background: var(--cream);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease, background 0.3s ease;
-    }
-    nav.scrolled {
-      border-color: var(--rule);
-      background: rgba(247,244,239,0.96);
-      backdrop-filter: blur(8px);
-    }
-    .nav-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-      text-decoration: none;
-      transition: color 0.2s;
-      cursor: pointer;
-    }
+    body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; min-height: 100vh; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; background: var(--cream); border-bottom: 1px solid transparent; transition: border-color 0.3s ease, background 0.3s ease; }
+    nav.scrolled { border-color: var(--rule); background: rgba(247,244,239,0.96); backdrop-filter: blur(8px); }
+    .nav-name { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); cursor: pointer; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; cursor: pointer; }
     .nav-links a:hover { color: var(--accent); }
-
-    /* PAGES */
     .page { display: none; }
     .page.active { display: block; }
-
-    /* HERO */
-    .hero {
-      min-height: 60vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 8rem 3rem 4rem;
-    }
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 300;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      max-width: 14ch;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--ink-soft);
-    }
-    .hero-sub {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-      max-width: 48ch;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
-    }
-    .hero-rule {
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-      margin: 2rem 0 1rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.5s forwards;
-    }
-
-    /* WORK GRID */
-    .work-section {
-      padding: 6rem 3rem;
-    }
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 3rem;
-    }
-    .work-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-    .work-item {
-      border-top: 1px solid var(--rule);
-      padding: 2.5rem 0;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
-      gap: 2rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      padding-left: 0;
-      padding-right: 2rem;
-      position: relative;
-    }
-    .work-item:nth-child(odd) { padding-right: 3rem; padding-left: 0; }
+    .hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 3rem 4rem; }
+    .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; line-height: 1.0; letter-spacing: -0.02em; color: var(--ink); max-width: 14ch; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+    .hero-rule { width: 40px; height: 1px; background: var(--accent); margin: 2rem 0 1rem; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards; }
+    .hero-sub { font-size: 0.95rem; color: var(--ink-muted); max-width: 48ch; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+    .work-section { padding: 6rem 3rem; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 3rem; }
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .work-item { border-top: 1px solid var(--rule); padding: 2.5rem 0; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 2rem; cursor: pointer; transition: background 0.2s; }
+    .work-item:nth-child(odd) { padding-right: 3rem; }
     .work-item:nth-child(even) { padding-left: 3rem; border-left: 1px solid var(--rule); }
     .work-item:hover { background: var(--hover-bg); }
     .work-item:hover .work-arrow { opacity: 1; transform: translateX(0); }
-
-    .work-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .work-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .work-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--ink);
-    }
-    .work-desc {
-      font-size: 0.82rem;
-      color: var(--ink-muted);
-      line-height: 1.6;
-      margin-top: 0.5rem;
-      max-width: 38ch;
-    }
-    .work-arrow {
-      font-size: 1.2rem;
-      color: var(--ink-muted);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.2s, transform 0.2s;
-      align-self: center;
-    }
-
-    /* CASE STUDY PAGE */
-    .case-study {
-      padding: 10rem 3rem 6rem;
-      max-width: 900px;
-    }
-    .case-back {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 4rem;
-      transition: color 0.2s;
-    }
+    .work-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem; }
+    .work-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; line-height: 1.2; color: var(--ink); }
+    .work-desc { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.6; margin-top: 0.5rem; max-width: 38ch; }
+    .work-arrow { font-size: 1.2rem; color: var(--ink-muted); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; align-self: center; }
+    .case-study { padding: 10rem 3rem 6rem; max-width: 900px; }
+    .case-back { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 4rem; transition: color 0.2s; }
     .case-back:hover { color: var(--accent); }
-    .case-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .case-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-    }
-    .case-subtitle {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 3rem;
-    }
-    .case-rule {
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-      margin: 2.5rem 0;
-    }
-    .case-body {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--ink-soft);
-      max-width: 62ch;
-    }
+    .case-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .case-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
+    .case-subtitle { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 3rem; }
+    .case-rule { width: 40px; height: 1px; background: var(--accent); margin: 2.5rem 0; }
+    .case-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); max-width: 62ch; }
     .case-body p + p { margin-top: 1.25rem; }
-    .case-role {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--rule);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-    .case-role span {
-      color: var(--ink);
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 0.78rem;
-    }
-    .case-image-placeholder {
-      width: 100%;
-      height: 320px;
-      background: var(--hover-bg);
-      border: 1px dashed var(--rule);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 3rem 0;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-
-    /* ABOUT PAGE */
-    .about-section {
-      padding: 10rem 3rem 6rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-    .about-left {}
-    .about-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 2rem;
-    }
-    .about-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 2rem;
-    }
-    .about-body {
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: var(--ink-soft);
-    }
+    .case-role { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule); font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+    .case-role span { color: var(--ink); display: block; margin-top: 0.25rem; font-size: 0.78rem; }
+    .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); gap: 2rem; }
+    .case-nav-item { display: flex; flex-direction: column; gap: 0.35rem; cursor: pointer; max-width: 40%; transition: opacity 0.2s; }
+    .case-nav-item:hover { opacity: 0.6; }
+    .case-nav-item.next { text-align: right; margin-left: auto; }
+    .case-nav-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); }
+    .case-nav-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--ink); line-height: 1.2; }
+    .case-media { margin: 3rem 0; display: flex; flex-direction: column; gap: 1.5rem; }
+    .case-media img { width: 100%; border-radius: 2px; display: block; }
+    .case-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .case-media-grid img { width: 100%; border-radius: 2px; display: block; }
+    .vimeo-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2px; background: #111; }
+    .vimeo-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .media-caption { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-top: 0.5rem; }
+    .live-embed-wrap { position: relative; width: 100%; height: 600px; border-radius: 2px; overflow: hidden; border: 1px solid var(--rule); }
+    .live-embed-wrap iframe { width: 100%; height: 100%; border: 0; }
+    .live-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.75rem; }
+    .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4caf50; display: inline-block; }
+    .about-section { padding: 10rem 3rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .about-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2rem; }
+    .about-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 2rem; }
+    .about-body { font-size: 0.95rem; line-height: 1.85; color: var(--ink-soft); }
     .about-body p + p { margin-top: 1.2rem; }
-    .about-right {}
-    .about-detail-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 0.5rem;
-      margin-top: 2rem;
-    }
+    .about-detail-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem; margin-top: 2rem; }
     .about-detail-label:first-child { margin-top: 0; }
-    .about-detail-value {
-      font-size: 0.92rem;
-      color: var(--ink);
-      line-height: 1.6;
-    }
-
-    /* CONTACT PAGE */
-    .contact-section {
-      padding: 10rem 3rem 6rem;
-    }
-    .contact-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .contact-body {
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-      max-width: 44ch;
-      margin-bottom: 3rem;
-    }
-    .contact-list {
-      list-style: none;
-      border-top: 1px solid var(--rule);
-    }
-    .contact-list li {
-      border-bottom: 1px solid var(--rule);
-      padding: 1.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .contact-list .label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-    .contact-list .value {
-      font-size: 0.92rem;
-      color: var(--ink);
-    }
-    .contact-list a {
-      color: var(--ink);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .about-detail-value { font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+    .contact-section { padding: 10rem 3rem 6rem; }
+    .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
+    .contact-body { font-size: 0.95rem; color: var(--ink-muted); max-width: 44ch; margin-bottom: 3rem; }
+    .contact-list { list-style: none; border-top: 1px solid var(--rule); }
+    .contact-list li { border-bottom: 1px solid var(--rule); padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .contact-list .label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+    .contact-list .value { font-size: 0.92rem; color: var(--ink); }
+    .contact-list a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
     .contact-list a:hover { color: var(--accent); }
-
-    /* FOOTER */
-    footer {
-      padding: 2.5rem 3rem;
-      border-top: 1px solid var(--rule);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-copy {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-in.animate {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    .fade-in.animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    footer { padding: 2.5rem 3rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 768px) {
       nav { padding: 1.25rem 1.5rem; }
-      .hero { padding: 0 1.5rem 3rem; }
+      .hero { padding: 6rem 1.5rem 3rem; }
       .work-section { padding: 4rem 1.5rem; }
       .work-grid { grid-template-columns: 1fr; }
       .work-item:nth-child(even) { padding-left: 0; border-left: none; }
@@ -448,86 +116,48 @@
       <div class="hero-rule"></div>
       <p class="hero-sub">A curated selection of work spanning design operations, AI tooling, brand building, and integrated production.</p>
     </section>
-
     <section class="work-section">
       <p class="section-label">Selected Work</p>
       <div class="work-grid">
-
-        <div class="work-item fade-in" onclick="showCase('prototype')">
-          <div class="work-meta">
-            <span class="work-tag">Design Tooling · Vistaprint</span>
-            <h2 class="work-title">Prototype Playground</h2>
-            <p class="work-desc">Giving designers a path to prototype directly in code — no engineering dependencies required.</p>
-          </div>
+        <div class="work-item" onclick="showCase('prototype')">
+          <div><span class="work-tag">Design Tooling · Vistaprint</span><h2 class="work-title">Prototype Playground</h2><p class="work-desc">Giving designers a path to prototype directly in code — no engineering dependencies required.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
-        <div class="work-item fade-in" onclick="showCase('ai')">
-          <div class="work-meta">
-            <span class="work-tag">AI Integration · Vistaprint</span>
-            <h2 class="work-title">AI Tooling & Governance</h2>
-            <p class="work-desc">Evaluating, governing, and scaling AI tools across a design organization.</p>
-          </div>
+        <div class="work-item" onclick="showCase('ai')">
+          <div><span class="work-tag">AI Integration · Vistaprint</span><h2 class="work-title">AI Tooling &amp; Governance</h2><p class="work-desc">Evaluating, governing, and scaling AI tools across a design organization.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
-        <div class="work-item fade-in" onclick="showCase('beter')">
-          <div class="work-meta">
-            <span class="work-tag">Design Ops · Better</span>
-            <h2 class="work-title">Brand & Team Scaling</h2>
-            <p class="work-desc">Building a design org from 8 to 30 while launching a new brand identity for a fast-growing fintech startup.</p>
-          </div>
+        <div class="work-item" onclick="showCase('better')">
+          <div><span class="work-tag">Design Ops · Better</span><h2 class="work-title">Brand &amp; Team Scaling</h2><p class="work-desc">Building a design org from 8 to 30 while launching a new brand identity for a fast-growing fintech startup.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
-        <div class="work-item fade-in" onclick="showCase('pg')">
-          <div class="work-meta">
-            <span class="work-tag">Platform Build · Publicis</span>
-            <h2 class="work-title">P&G / Brand.com</h2>
-            <p class="work-desc">Redesigning multi-brand web experiences for P&G, leading 100+ developers on-site in Bangalore.</p>
-          </div>
+        <div class="work-item" onclick="showCase('pg')">
+          <div><span class="work-tag">Platform Build · Publicis</span><h2 class="work-title">P&amp;G / Brand.com</h2><p class="work-desc">Redesigning multi-brand web experiences for P&amp;G, leading 100+ developers on-site in Bangalore.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
-        <div class="work-item fade-in" onclick="showCase('got')">
-          <div class="work-meta">
-            <span class="work-tag">Integrated Campaign · Campfire</span>
-            <h2 class="work-title">HBO / Game of Thrones</h2>
-            <p class="work-desc">A landmark multi-sensory campaign activating a passionate fan base ahead of the HBO series launch.</p>
-          </div>
+        <div class="work-item" onclick="showCase('got')">
+          <div><span class="work-tag">Integrated Campaign · Campfire</span><h2 class="work-title">HBO / Game of Thrones</h2><p class="work-desc">A landmark multi-sensory campaign activating a passionate fan base ahead of the HBO series launch.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
-        <div class="work-item fade-in" onclick="showCase('coordown')">
-          <div class="work-meta">
-            <span class="work-tag">Social Campaign · Publicis North America</span>
-            <h2 class="work-title">Coordown / Not Special Needs</h2>
-            <p class="work-desc">A viral campaign that reached 30M views in ten days and challenged assumptions about Down syndrome.</p>
-          </div>
+        <div class="work-item" onclick="showCase('coordown')">
+          <div><span class="work-tag">Social Campaign · Publicis North America</span><h2 class="work-title">Coordown / Not Special Needs</h2><p class="work-desc">A viral campaign that reached 30M views in ten days and challenged assumptions about Down syndrome.</p></div>
           <span class="work-arrow">→</span>
         </div>
-
       </div>
     </section>
-    <footer>
-      <span class="footer-copy">© 2026 Jakub Popadiuk</span>
-      <span class="footer-copy">jakub@popadiuk.org</span>
-    </footer>
+    <footer><span class="footer-copy">© 2026 Jakub Popadiuk</span><span class="footer-copy">jakub@popadiuk.org</span></footer>
   </div>
 
-  <!-- CASE STUDIES -->
+  <!-- CASE STUDY -->
   <div id="page-case" class="page">
     <div class="case-study" id="case-content"></div>
-    <footer>
-      <span class="footer-copy">© 2026 Jakub Popadiuk</span>
-      <span class="footer-copy">jakub@popadiuk.org</span>
-    </footer>
+    <footer><span class="footer-copy">© 2026 Jakub Popadiuk</span><span class="footer-copy">jakub@popadiuk.org</span></footer>
   </div>
 
   <!-- ABOUT -->
   <div id="page-about" class="page">
     <section class="about-section">
-      <div class="about-left">
+      <div>
         <p class="about-eyebrow">About</p>
         <h1 class="about-title">Building the conditions where great work happens.</h1>
         <div class="about-body">
@@ -537,321 +167,126 @@
           <p>I care about the craft of making things, and about building the conditions where great work can happen consistently.</p>
         </div>
       </div>
-      <div class="about-right">
-        <p class="about-detail-label">Current Role</p>
-        <p class="about-detail-value">Principal Design Program Manager<br>Vistaprint</p>
-        <p class="about-detail-label">Based</p>
-        <p class="about-detail-value">New York, NY</p>
-        <p class="about-detail-label">Background</p>
-        <p class="about-detail-value">Design Ops · AI Tooling · Integrated Production · Brand</p>
-        <p class="about-detail-label">Contact</p>
-        <p class="about-detail-value"><a href="mailto:jakub@popadiuk.org" style="color:var(--ink);text-decoration:none;">jakub@popadiuk.org</a></p>
+      <div>
+        <p class="about-detail-label">Current Role</p><p class="about-detail-value">Principal Design Program Manager<br>Vistaprint</p>
+        <p class="about-detail-label">Based</p><p class="about-detail-value">New York, NY</p>
+        <p class="about-detail-label">Background</p><p class="about-detail-value">Design Ops · AI Tooling · Integrated Production · Brand</p>
+        <p class="about-detail-label">Contact</p><p class="about-detail-value"><a href="mailto:jakub@popadiuk.org" style="color:var(--ink);text-decoration:none;">jakub@popadiuk.org</a></p>
       </div>
     </section>
-    <footer>
-      <span class="footer-copy">© 2026 Jakub Popadiuk</span>
-      <span class="footer-copy">jakub@popadiuk.org</span>
-    </footer>
+    <footer><span class="footer-copy">© 2026 Jakub Popadiuk</span><span class="footer-copy">jakub@popadiuk.org</span></footer>
   </div>
 
   <!-- CONTACT -->
   <div id="page-contact" class="page">
     <section class="contact-section">
-      <p class="about-eyebrow" style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:2rem;">Contact</p>
+      <p class="about-eyebrow">Contact</p>
       <h1 class="contact-title">Let's talk.</h1>
       <p class="contact-body">Currently open to new opportunities and conversations. The best way to reach me is email.</p>
       <ul class="contact-list">
-        <li>
-          <span class="label">Email</span>
-          <span class="value"><a href="mailto:jakub@popadiuk.org">jakub@popadiuk.org</a></span>
-        </li>
-        <li>
-          <span class="label">Phone</span>
-          <span class="value"><a href="tel:9175141692">917.514.1692</a></span>
-        </li>
-        <li>
-          <span class="label">Location</span>
-          <span class="value">New York, NY</span>
-        </li>
-        <li>
-          <span class="label">LinkedIn</span>
-          <span class="value"><a href="https://linkedin.com/in/jakubpopadiuk" target="_blank">linkedin.com/in/jakubpopadiuk</a></span>
-        </li>
+        <li><span class="label">Email</span><span class="value"><a href="mailto:jakub@popadiuk.org">jakub@popadiuk.org</a></span></li>
+        <li><span class="label">Phone</span><span class="value"><a href="tel:9175141692">917.514.1692</a></span></li>
+        <li><span class="label">Location</span><span class="value">New York, NY</span></li>
+        <li><span class="label">LinkedIn</span><span class="value"><a href="https://linkedin.com/in/jakubpopadiuk" target="_blank">linkedin.com/in/jakubpopadiuk</a></span></li>
       </ul>
     </section>
-    <footer>
-      <span class="footer-copy">© 2026 Jakub Popadiuk</span>
-      <span class="footer-copy">jakub@popadiuk.org</span>
-    </footer>
+    <footer><span class="footer-copy">© 2026 Jakub Popadiuk</span><span class="footer-copy">jakub@popadiuk.org</span></footer>
   </div>
 
-  <style>
-    .case-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 4rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--rule);
-      gap: 2rem;
-    }
-    .case-nav-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      cursor: pointer;
-      max-width: 40%;
-      transition: opacity 0.2s;
-    }
-    .case-nav-item:hover { opacity: 0.6; }
-    .case-nav-item.next { text-align: right; margin-left: auto; }
-    .case-nav-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-    }
-    .case-nav-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-    .case-media { margin: 3rem 0; display: flex; flex-direction: column; gap: 1.5rem; }
-    .case-media img { width: 100%; border-radius: 2px; display: block; }
-    .case-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .case-media-grid img { width: 100%; border-radius: 2px; display: block; }
-    .vimeo-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2px; background: #111; }
-    .vimeo-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    .media-caption { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-top: 0.5rem; }
-    .live-embed-wrap { position: relative; width: 100%; height: 600px; border-radius: 2px; overflow: hidden; border: 1px solid var(--rule); }
-    .live-embed-wrap iframe { width: 100%; height: 100%; border: 0; }
-    .live-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.75rem; }
-    .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4caf50; display: inline-block; }
-  </style>
-
   <script>
-    const caseOrder = ['prototype', 'ai', 'beter', 'pg', 'got', 'coordown'];
-    const caseTitles = {
+    var caseOrder = ['prototype', 'ai', 'better', 'pg', 'got', 'coordown'];
+
+    var caseTitles = {
       prototype: 'Prototype Playground',
       ai: 'AI Tooling & Governance',
-      beter: 'Better / Brand & Team Scaling',
+      better: 'Better / Brand & Team Scaling',
       pg: 'P&G / Brand.com',
       got: 'HBO / Game of Thrones',
       coordown: 'Coordown / Not Special Needs'
     };
 
-    const cases = {
+    var cases = {
       prototype: {
         tag: 'Design Tooling / Prototyping Infrastructure',
         title: 'Prototype Playground',
         subtitle: 'Vistaprint',
-        body: `<p>Designers are full of ideas that live and die in Figma — not because the ideas are wrong, but because translating them into code has always required an engineer. The Prototype Playground changed that.</p>
-               <p>Built as a shared environment for Vistaprint's design organization, the Playground gave designers a path to prototype directly in code without engineering dependencies. The result was faster iteration, higher-fidelity testing, and a tighter feedback loop between design intent and production reality.</p>
-               <p>The program reduced the cycle time between a design idea and a testable prototype, and opened up a new class of experimentation that simply wasn't possible before.</p>`,
+        body: '<p>Designers are full of ideas that live and die in Figma — not because the ideas are wrong, but because translating them into code has always required an engineer. The Prototype Playground changed that.</p><p>Built as a shared environment for Vistaprint\'s design organization, the Playground gave designers a path to prototype directly in code without engineering dependencies. The result was faster iteration, higher-fidelity testing, and a tighter feedback loop between design intent and production reality.</p><p>The program reduced the cycle time between a design idea and a testable prototype, and opened up a new class of experimentation that simply wasn\'t possible before.</p>',
         role: 'Principal Design Program Manager',
-        media: `<div class="case-media">
-          <div>
-            <p class="live-badge">Live prototype</p>
-            <div class="live-embed-wrap">
-              <iframe src="https://vista-prototype-playground-778o5vm1c-jakubp-jpgs-projects.vercel.app/" allowfullscreen></iframe>
-            </div>
-            <p class="media-caption">Vistaprint Prototype Playground — interact directly</p>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div><p class="live-badge">Live prototype</p><div class="live-embed-wrap"><iframe src="https://vista-prototype-playground-778o5vm1c-jakubp-jpgs-projects.vercel.app/" allowfullscreen></iframe></div><p class="media-caption">Vistaprint Prototype Playground — interact directly</p></div></div>'
       },
       ai: {
         tag: 'AI Integration / Design Ops / Working Group Leadership',
         title: 'AI Tooling & Governance',
         subtitle: 'Vistaprint',
-        body: `<p>As AI tools began reshaping how design teams work, Vistaprint needed more than adoption — it needed a framework. I led the evaluation and recommendation of AI tools across the design organization, developed the governance process for responsible rollout, and co-led the UX AI working group that brought cross-functional stakeholders into alignment.</p>
-               <p>The work established a repeatable model for how a design org could assess, pilot, and scale AI tooling without sacrificing quality or consistency.</p>
-               <p>The result was a design organization that moved faster, with guardrails in place — and a working group model that became a template for how Vistaprint approached emerging tooling decisions.</p>`,
+        body: '<p>As AI tools began reshaping how design teams work, Vistaprint needed more than adoption — it needed a framework. I led the evaluation and recommendation of AI tools across the design organization, developed the governance process for responsible rollout, and co-led the UX AI working group that brought cross-functional stakeholders into alignment.</p><p>The work established a repeatable model for how a design org could assess, pilot, and scale AI tooling without sacrificing quality or consistency.</p><p>The result was a design organization that moved faster, with guardrails in place — and a working group model that became a template for how Vistaprint approached emerging tooling decisions.</p>',
         role: 'Principal Design Program Manager',
-        media: `<div class="case-media">
-          <div style="background:var(--hover-bg);border:1px solid var(--rule);border-radius:2px;padding:2rem;margin-bottom:0.5rem;">
-            <p style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">From the PXOps AI Playbook</p>
-            <p style="font-size:0.9rem;line-height:1.75;color:var(--ink-soft);max-width:58ch;">A core output of the working group was a reimagined product development model — mapping how AI changes every phase of the design process, from discovery through to build, and quantifying the impact on cycle time and team focus.</p>
-          </div>
-          <p class="media-caption">Context</p>
-          <div>
-            <img src="ai_product_journey.png" alt="Product Development Journey — Current Flow" style="width:100%;border-radius:2px;border:1px solid var(--rule);" />
-            <p class="media-caption">Product Development Journey / Current Flow</p>
-          </div>
-          <div>
-            <img src="ai_journey_impact.png" alt="AI Powered Journey Impact" style="width:100%;border-radius:2px;border:1px solid var(--rule);" />
-            <p class="media-caption">AI Powered Journey Impact</p>
-          </div>
-          <div>
-            <img src="ai_dev_model.png" alt="Reimagining our Product Development Model" style="width:100%;border-radius:2px;border:1px solid var(--rule);" />
-            <p class="media-caption">Reimagining the Product Development Model</p>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div style="background:var(--hover-bg);border:1px solid var(--rule);border-radius:2px;padding:2rem;"><p style="font-family:\'DM Mono\',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">From the PXOps AI Playbook</p><p style="font-size:0.9rem;line-height:1.75;color:var(--ink-soft);">A core output of the working group was a reimagined product development model — mapping how AI changes every phase of the design process, from discovery through to build, and quantifying the impact on cycle time and team focus.</p></div><div><img src="ai_product_journey.png" alt="Product Development Journey" /><p class="media-caption">Product Development Journey / Current Flow</p></div><div><img src="ai_journey_impact.png" alt="AI Powered Journey Impact" /><p class="media-caption">AI Powered Journey Impact</p></div><div><img src="ai_dev_model.png" alt="Reimagining our Product Development Model" /><p class="media-caption">Reimagining the Product Development Model</p></div></div>'
       },
-      beter: {
+      better: {
         tag: 'In-House Studio / Brand Identity / Design Ops',
-        title: 'Brand & Team Scaling',
+        title: 'Better / Brand & Team Scaling',
         subtitle: 'Better',
-        body: `<p>Better is a fast-growing fintech startup that needed to build a design capability from the ground up — and fast. I led operations for the in-house creative studio, scaling the team from 8 to 30 FTEs while simultaneously co-leading the development and launch of an entirely new brand identity.</p>
-               <p>The shift to agile methodology increased output volume without compromising quality, and the new brand system was built from the start to scale across both product and marketing surfaces.</p>
-               <p>The studio went from a scrappy early-stage team to a fully operational creative function with producers, a Design Ops manager, and a brand language that could grow with the company.</p>`,
+        body: '<p>Better is a fast-growing fintech startup that needed to build a design capability from the ground up — and fast. I led operations for the in-house creative studio, scaling the team from 8 to 30 FTEs while simultaneously co-leading the development and launch of an entirely new brand identity.</p><p>The shift to agile methodology increased output volume without compromising quality, and the new brand system was built from the start to scale across both product and marketing surfaces.</p><p>The studio went from a scrappy early-stage team to a fully operational creative function with producers, a Design Ops manager, and a brand language that could grow with the company.</p>',
         role: 'Head of Design Operations',
-        media: `<div class="case-media">
-          <div>
-            <div class="vimeo-wrap">
-              <iframe src="https://player.vimeo.com/video/1181270028" allowfullscreen></iframe>
-            </div>
-            <p class="media-caption">Better / Brand Identity Case Study</p>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/1181270028" allowfullscreen></iframe></div><p class="media-caption">Better / Brand Identity Case Study</p></div></div>'
       },
       pg: {
         tag: 'Website / Sitecore CMS',
         title: 'P&G / Brand.com',
         subtitle: 'Publicis North America',
-        body: `<p>When P&G mandated that all of its websites transition to Sitecore, we took the opportunity to redesign and launch a brand new experience across its Cascade, Dawn and Swiffer brands. Starting with a heuristic analysis of the existing site and a deep dive into SEO and SEM opportunities, our team created and launched an optimized experience that reflected the needs of its consumers.</p>
-               <p>As part of the development efforts I spent three weeks on-site in Bangalore, India, managing a team of 100+ developers to bring the three sites to life. It was a masterclass in cross-cultural collaboration, remote coordination, and keeping complex multi-stakeholder builds on track under pressure.</p>`,
+        body: '<p>When P&G mandated that all of its websites transition to Sitecore, we took the opportunity to redesign and launch a brand new experience across its Cascade, Dawn and Swiffer brands. Starting with a heuristic analysis of the existing site and a deep dive into SEO and SEM opportunities, our team created and launched an optimized experience that reflected the needs of its consumers.</p><p>As part of the development efforts I spent three weeks on-site in Bangalore, India, managing a team of 100+ developers to bring the three sites to life. It was a masterclass in cross-cultural collaboration, remote coordination, and keeping complex multi-stakeholder builds on track under pressure.</p>',
         role: 'Senior Integrated Producer',
-        media: `<div class="case-media">
-          <div>
-            <img src="pg_cascade.webp" alt="Cascade.com" />
-            <p class="media-caption">Cascade.com</p>
-          </div>
-          <div class="case-media-grid">
-            <div>
-              <img src="pg_dawn.webp" alt="Dawn-dish.com" />
-              <p class="media-caption">Dawn-dish.com</p>
-            </div>
-            <div>
-              <img src="pg_swiffer.webp" alt="Swiffer.com" />
-              <p class="media-caption">Swiffer.com</p>
-            </div>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div><img src="pg_cascade.webp" alt="Cascade.com" /><p class="media-caption">Cascade.com</p></div><div class="case-media-grid"><div><img src="pg_dawn.webp" alt="Dawn-dish.com" /><p class="media-caption">Dawn-dish.com</p></div><div><img src="pg_swiffer.webp" alt="Swiffer.com" /><p class="media-caption">Swiffer.com</p></div></div></div>'
       },
       got: {
         tag: 'Website / App / Digital Video / 3D Audio / Influencer Outreach / Social',
         title: 'HBO / Game of Thrones',
         subtitle: 'Campfire',
-        body: `<p>To raise awareness of Game of Thrones, HBO's adaptation of George RR Martin's epic fantasy novels, we created a series of experiences based on the five senses. The novels already had a passionate and connected fan base, so our strategy was to activate those fans and have them broadcast their excitement to a wider audience.</p>
-               <p>We demonstrated the attention to detail that HBO would bring to Game of Thrones by evoking the visceral nature of touch, taste, sight, sound and smell in a series of immersive storytelling experiences.</p>
-               <p>The campaign combined innovative sensory marketing tactics with complex challenges for fans at themaesterspath.com. Successful fans were rewarded with exclusive preview clips and Get Glue stickers.</p>`,
+        body: '<p>To raise awareness of Game of Thrones, HBO\'s adaptation of George RR Martin\'s epic fantasy novels, we created a series of experiences based on the five senses. The novels already had a passionate and connected fan base, so our strategy was to activate those fans and have them broadcast their excitement to a wider audience.</p><p>We demonstrated the attention to detail that HBO would bring to Game of Thrones by evoking the visceral nature of touch, taste, sight, sound and smell in a series of immersive storytelling experiences.</p><p>The campaign combined innovative sensory marketing tactics with complex challenges for fans at themaesterspath.com. Successful fans were rewarded with exclusive preview clips and Get Glue stickers.</p>',
         role: 'Producer — Digital, Scent Kits & Influencer Engagement',
-        media: `<div class="case-media">
-          <div>
-            <div class="vimeo-wrap">
-              <iframe src="https://player.vimeo.com/video/23799198" allowfullscreen></iframe>
-            </div>
-            <p class="media-caption">Campaign Case Study</p>
-          </div>
-          <div class="case-media-grid">
-            <div>
-              <img src="got_maesterspath.webp" alt="The Maester's Path" />
-              <p class="media-caption">Website / The Maester's Path</p>
-            </div>
-            <div>
-              <img src="got_scent.webp" alt="Scent Puzzle" />
-              <p class="media-caption">Website / Scent Puzzle</p>
-            </div>
-            <div>
-              <img src="got_app.webp" alt="Ice & Fire Weather App" />
-              <p class="media-caption">iOS App / Ice & Fire Weather</p>
-            </div>
-            <div>
-              <img src="got_scentbox.webp" alt="Influencer Scent Box" />
-              <p class="media-caption">Influencer Outreach / Scent Box</p>
-            </div>
-          </div>
-          <div>
-            <img src="got_foodtruck.webp" alt="Game of Thrones Food Truck" />
-            <p class="media-caption">Fan Event / Food Truck</p>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/23799198" allowfullscreen></iframe></div><p class="media-caption">Campaign Case Study</p></div><div class="case-media-grid"><div><img src="got_maesterspath.webp" alt="The Maesters Path" /><p class="media-caption">Website / The Maesters Path</p></div><div><img src="got_scent.webp" alt="Scent Puzzle" /><p class="media-caption">Website / Scent Puzzle</p></div><div><img src="got_app.webp" alt="Ice and Fire Weather App" /><p class="media-caption">iOS App / Ice & Fire Weather</p></div><div><img src="got_scentbox.webp" alt="Influencer Scent Box" /><p class="media-caption">Influencer Outreach / Scent Box</p></div></div><div><img src="got_foodtruck.webp" alt="Food Truck" /><p class="media-caption">Fan Event / Food Truck</p></div></div>'
       },
       coordown: {
         tag: 'Video / Social / Website',
         title: 'Coordown / Not Special Needs',
         subtitle: 'Publicis North America',
-        body: `<p>For World Down Syndrome Day, CoorDown launched a campaign that challenged the phrase "Special Needs." We pointed out absurd examples of what a real "special need" would be, and explained that what people with Down syndrome actually need isn't special at all: it's education, jobs, opportunities, friends, and some love.</p>
-               <p>The campaign spread virally across social media with 600K shares and 30M views in the first ten days, and was picked up by news outlets throughout the world.</p>`,
+        body: '<p>For World Down Syndrome Day, CoorDown launched a campaign that challenged the phrase "Special Needs." We pointed out absurd examples of what a real "special need" would be, and explained that what people with Down syndrome actually need isn\'t special at all: it\'s education, jobs, opportunities, friends, and some love.</p><p>The campaign spread virally across social media with 600K shares and 30M views in the first ten days, and was picked up by news outlets throughout the world.</p>',
         role: 'Senior Producer',
-        media: `<div class="case-media">
-          <div>
-            <div class="vimeo-wrap">
-              <iframe src="https://player.vimeo.com/video/250018840" allowfullscreen></iframe>
-            </div>
-            <p class="media-caption">Not Special Needs — Campaign Film</p>
-          </div>
-          <div>
-            <div class="vimeo-wrap">
-              <iframe src="https://player.vimeo.com/video/250180125" allowfullscreen></iframe>
-            </div>
-            <p class="media-caption">Case Study</p>
-          </div>
-        </div>`
+        media: '<div class="case-media"><div><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/250018840" allowfullscreen></iframe></div><p class="media-caption">Not Special Needs — Campaign Film</p></div><div><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/250180125" allowfullscreen></iframe></div><p class="media-caption">Case Study</p></div></div>'
       }
     };
 
     function showCase(id) {
-      const c = cases[id];
-      const idx = caseOrder.indexOf(id);
-      const prevId = idx > 0 ? caseOrder[idx - 1] : null;
-      const nextId = idx < caseOrder.length - 1 ? caseOrder[idx + 1] : null;
-
-      const prevNav = prevId ? `
-        <div class="case-nav-item prev" onclick="showCase('${prevId}')">
-          <span class="case-nav-label">← Previous</span>
-          <span class="case-nav-title">${caseTitles[prevId]}</span>
-        </div>` : '<div></div>';
-
-      const nextNav = nextId ? `
-        <div class="case-nav-item next" onclick="showCase('${nextId}')">
-          <span class="case-nav-label">Next →</span>
-          <span class="case-nav-title">${caseTitles[nextId]}</span>
-        </div>` : '<div></div>';
-
-      document.getElementById('case-content').innerHTML = `
-        <span class="case-back" onclick="showPage('home')">← Selected Work</span>
-        <p class="case-eyebrow">${c.tag}</p>
-        <h1 class="case-title">${c.title}</h1>
-        <p class="case-subtitle">${c.subtitle}</p>
-        <div class="case-rule"></div>
-        <div class="case-body">${c.body}</div>
-        ${c.media}
-        <div class="case-role">Role <span>${c.role}</span></div>
-        <div class="case-nav">${prevNav}${nextNav}</div>
-      `;
+      var c = cases[id];
+      var idx = caseOrder.indexOf(id);
+      var prevId = idx > 0 ? caseOrder[idx - 1] : null;
+      var nextId = idx < caseOrder.length - 1 ? caseOrder[idx + 1] : null;
+      var prevNav = prevId ? '<div class="case-nav-item prev" onclick="showCase(\'' + prevId + '\')"><span class="case-nav-label">&larr; Previous</span><span class="case-nav-title">' + caseTitles[prevId] + '</span></div>' : '<div></div>';
+      var nextNav = nextId ? '<div class="case-nav-item next" onclick="showCase(\'' + nextId + '\')"><span class="case-nav-label">Next &rarr;</span><span class="case-nav-title">' + caseTitles[nextId] + '</span></div>' : '<div></div>';
+      document.getElementById('case-content').innerHTML =
+        '<span class="case-back" onclick="showPage(\'home\')">&larr; Selected Work</span>' +
+        '<p class="case-eyebrow">' + c.tag + '</p>' +
+        '<h1 class="case-title">' + c.title + '</h1>' +
+        '<p class="case-subtitle">' + c.subtitle + '</p>' +
+        '<div class="case-rule"></div>' +
+        '<div class="case-body">' + c.body + '</div>' +
+        c.media +
+        '<div class="case-role">Role <span>' + c.role + '</span></div>' +
+        '<div class="case-nav">' + prevNav + nextNav + '</div>';
       showPage('case');
       window.scrollTo(0, 0);
     }
 
     function showPage(name) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      var pages = document.querySelectorAll('.page');
+      for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
       document.getElementById('page-' + name).classList.add('active');
       window.scrollTo(0, 0);
-      initFadeIns();
     }
 
-    function initFadeIns() {
-      const els = document.querySelectorAll('.fade-in');
-      els.forEach(el => el.classList.add('animate'));
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((e, i) => {
-          if (e.isIntersecting) {
-            setTimeout(() => e.target.classList.add('visible'), i * 80);
-          }
-        });
-      }, { threshold: 0.1 });
-      els.forEach(el => obs.observe(el));
-    }
-
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
       document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 20);
     });
-
-    initFadeIns();
   </script>
 </body>
 </html>
