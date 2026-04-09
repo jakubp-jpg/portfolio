@@ -47,8 +47,6 @@
     .case-rule { width: 40px; height: 1px; background: var(--accent); margin: 2.5rem 0; }
     .case-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); max-width: 62ch; }
     .case-body p + p { margin-top: 1.25rem; }
-    .case-role { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule); font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
-    .case-role span { color: var(--ink); display: block; margin-top: 0.25rem; font-size: 0.78rem; }
     .case-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); gap: 2rem; }
     .case-nav-item { display: flex; flex-direction: column; gap: 0.35rem; cursor: pointer; max-width: 40%; transition: opacity 0.2s; }
     .case-nav-item:hover { opacity: 0.6; }
@@ -271,7 +269,6 @@
         '<div class="case-rule"></div>' +
         '<div class="case-body">' + c.body + '</div>' +
         c.media +
-        '<div class="case-role">Role <span>' + c.role + '</span></div>' +
         '<div class="case-nav">' + prevNav + nextNav + '</div>';
       showPage('case');
       window.scrollTo(0, 0);
